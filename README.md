@@ -5,6 +5,7 @@ Le but de ce programme Python de permettre une extraction des données de Zotero
 afin de géner des fichiers au format (.CSV) de node et de lien pour les auteurs et les tags.
 
 Le programme est basé sur une extraction des données en entrée selon le format suivant:
+
 	RF ...... (type de journal ou de revue)
 	T1 ...... (Titre principal de l'article)
 	A1 ...... (Auteur numero 1)
@@ -15,10 +16,12 @@ Le programme est basé sur une extraction des données en entrée selon le forma
 	Kn ...... (Tag numero N)
 
 Puis le mettre dans un dictionnaire selon le format suivant:
+
 	nnRF .....
 	nnT1 .....
 	nnA1aa .....
 	nnYR .....
 	nnLA .....
 	nnK1kk ....
+	T1 .... (nombre d'article nn de la base Zotero)
 
