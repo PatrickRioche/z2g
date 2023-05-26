@@ -4,9 +4,7 @@ if len(sys.argv) < 2:
     print("Z2G.py <nom_fichier.txt> (export Zotero RefWorks Tagged)",file=sys.stderr)
     exit(1)
 
-
-nomfic = sys.argv[1]
-#print(nomfic)
+sNomfic = sys.argv[1]
 
 #
 #   Initialisation varaible globale
@@ -19,76 +17,113 @@ nbtag=1
 #
 #   s/programme
 #
+def ClearVirgule( sTheString ):
+    sResult = sTheString.replace(',',' ')
+    return( sResult )
+
 def addT1( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"T1"
-        dZotero[sKey]=dataline.rstrip()
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 def addRT( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"RT"
-        dZotero[sKey]=dataline.rstrip()   
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 def addYR( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"YR"
-        dZotero[sKey]=dataline.rstrip()
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 def addLA( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"LA"
-        dZotero[sKey]=dataline.rstrip()
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 def addA1( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"A1"+"{:02d}".format(nbaut)
-        dZotero[sKey]=dataline.rstrip()
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 def addK1( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"K1"+"{:02d}".format(nbtag)
-        dZotero[sKey]=dataline.rstrip()
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
 #
-#   Ouvrir le fichier en lecture seule
+#   Ouvrir des fichiers
 #
-file = open(nomfic, encoding='utf8')
+fZotero = open(sNomfic, encoding='utf8')
+fT1 = open("Titre.csv","w")
 
 # utilisez readline() pour lire la première ligne
-line = file.readline()
+line = fZotero.readline()
 
 while line:
     # utilisez readline() pour lire la ligne suivante
-    line = file.readline()
+    line = fZotero.readline()
     if  line[0:2] == "T1":
         addT1( line )
         nbart=nbart+1
-        nbaut=1
+        nbaut=1 
         nbtag=1
         
     if  line[0:2] == "RT":
         addRT( line )
+
     if  line[0:2] == "YR":
         addYR( line )
+
     if  line[0:2] == "LA":
         addLA( line )
+
     if  line[0:2] == "A1":
         addA1( line )
         nbaut=nbaut+1
+
     if  line[0:2] == "K1":
         addK1( line )
         nbtag=nbtag+1
 
-file.close()
+fZotero.close()
+
 #
 #   Ajout nombre d'article
 #
-#sKey="{:02d}".format(nbart-1)+"A1"
-#dZotero[sKey]="{:02d}".format(nbaut-1)
-
-#sKey="{:02d}".format(nbart-1)+"K1"
-#dZotero[sKey]="{:02d}".format(nbtag-1)
-
 dZotero["T1"]="{:02d}".format(nbart-1)
 
-print( dZotero )
+#print( dZotero )
+
+#
+#   Restitution
+#
+fT1.write("Id,Label,RT,YR,LA\n")
+
+iNbArti = int(dZotero["T1"])
+print( "Nombre article = ", iNbArti)
+i=1
+while i < iNbArti+1:
+    try:
+        sLabel = dZotero[str(i).zfill(2)+"T1"]
+    except:
+        sLabel = "vide"
+    try:
+        sRT = dZotero[str(i).zfill(2)+"RT"]
+    except:
+        sRT = "vide"
+    try: 
+        sYR = dZotero[str(i).zfill(2)+"YR"]
+    except:
+         sYR = "vide"
+    try:
+        sLA = dZotero[str(i).zfill(2)+"LA"]
+    except:
+        sLA = "vide"
+    fT1.write(str(i).zfill(2)+ "," + sLabel + "," + sRT + "," + sYR + "," + sLA + "\n" )
+    i = i +1  
+
+fT1.close()
+#
+#   Fin
+#
