@@ -59,6 +59,8 @@ def addK1( sLine ):
 #
 fZotero = open(sNomfic, encoding='utf8')
 fT1 = open("T1.csv","w")
+fA1 = open("A1.csv","w")
+fK1 = open("K1.csv","w")
 
 for line in fZotero:
 
@@ -98,12 +100,11 @@ dZotero["T1"]="{:02d}".format(nbart)
 print( dZotero )
 
 #
-#   Restitution
+#   Restitution des Titres
 #
 fT1.write("Id,Label,RT,YR,LA\n")
 
 iNbArti = int(dZotero["T1"])
-print( "Nombre article = ", iNbArti)
 i=1
 while i < iNbArti+1:
     try:
@@ -126,6 +127,49 @@ while i < iNbArti+1:
     i = i +1  
 
 fT1.close()
+
+#
+#   Restitution des auteurs
+#
+fA1.write("Id,Label\n")
+iNbArti = int(dZotero["T1"])
+i=1
+a1=1
+while i < iNbArti+1:
+    nA1 = dZotero[str(i).zfill(2)+"A1"]
+    a = 1
+    while a < int(nA1):
+        sA1 = dZotero[str(i).zfill(2)+"A1"+str(a).zfill(2)]
+        fA1.write(str(a1).zfill(2)+ "," + sA1 + "\n" )
+        a = a + 1
+        a1 = a1 + 1  
+
+    i = i + 1
+    
+fA1.close()
+
+#
+#   Restitution des tags
+#
+fK1.write("Id,Label\n")
+iNbArti = int(dZotero["T1"])
+i=1
+k1=1
+while i < iNbArti+1:
+    try:
+        nK1 = dZotero[str(i).zfill(2)+"K1"]
+    except:
+        nK1 = 0
+    k = 1
+    while k < int(nK1):
+        sK1 = dZotero[str(i).zfill(2)+"K1"+str(k).zfill(2)]
+        fK1.write(str(k1).zfill(2)+ "," + sK1 + "\n" )
+        k = k + 1
+        k1 = k1 + 1  
+
+    i = i + 1
+    
+fK1.close()
 #
 #   Fin
 #
