@@ -27,3 +27,17 @@ Puis le mettre dans un dictionnaire selon le format suivant:
 	nnK1 ..  (nombre de tag pour nn)
 	T1 .... (nombre d'article nn de la base Zotero)
 
+Génération fichier T1.CSV
+
+	Id, Label, RF, YR, LA
+	.., ....., .., .., ..
+	
+Génération fichier A1.CSV
+
+	Id, Label, IdT1
+	.., ....., ..
+	
+Génération fichier K1.CSV
+
+	Id, Label, IdT1
+	.., ....., ..
