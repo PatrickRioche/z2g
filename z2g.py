@@ -131,7 +131,7 @@ fT1.close()
 #
 #   Restitution des auteurs
 #
-fA1.write("Id,Label\n")
+fA1.write("Id,Label,IdT1\n")
 iNbArti = int(dZotero["T1"])
 i=1
 a1=1
@@ -140,7 +140,7 @@ while i < iNbArti+1:
     a = 1
     while a < int(nA1):
         sA1 = dZotero[str(i).zfill(2)+"A1"+str(a).zfill(2)]
-        fA1.write(str(a1).zfill(2)+ "," + sA1 + "\n" )
+        fA1.write(str(a1).zfill(2)+ "," + sA1 + "," + str(i).zfill(2) + "\n" )
         a = a + 1
         a1 = a1 + 1  
 
@@ -151,7 +151,7 @@ fA1.close()
 #
 #   Restitution des tags
 #
-fK1.write("Id,Label\n")
+fK1.write("Id,Label,IdT1\n")
 iNbArti = int(dZotero["T1"])
 i=1
 k1=1
@@ -163,7 +163,7 @@ while i < iNbArti+1:
     k = 1
     while k < int(nK1):
         sK1 = dZotero[str(i).zfill(2)+"K1"+str(k).zfill(2)]
-        fK1.write(str(k1).zfill(2)+ "," + sK1 + "\n" )
+        fK1.write(str(k1).zfill(2)+ "," + sK1 + "," + str(i).zfill(2)+"\n" )
         k = k + 1
         k1 = k1 + 1  
 
