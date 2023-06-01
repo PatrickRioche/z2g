@@ -118,15 +118,15 @@ while i < iNbArti+1:
     try:
         sLabel = dZotero[str(i).zfill(2)+"T1"]
     except:
-        sLabel = "neant"
+        sLabel = "??"
     try:
         sRT = dZotero[str(i).zfill(2)+"RT"]
     except:
-        sRT = "neant"
+        sRT = "??"
     try:
         sJO = dZotero[str(i).zfill(2)+"JO"]
     except:
-        sJO = "neant"
+        sJO = "??"
     try: 
         sYR = dZotero[str(i).zfill(2)+"YR"]
     except:
@@ -148,10 +148,19 @@ iNbArti = int(dZotero["T1"])
 i=1
 a1=1
 while i < iNbArti+1:
+    
+    #
+    #   Ya toujours au moins un auteur 
+    #
     nA1 = dZotero[str(i).zfill(2)+"A1"]
+    # print( "article ", i, " nA1 ", nA1 )
+
     a = 1
-    while a < int(nA1):
+    while a < int(nA1)+1:
         sA1 = dZotero[str(i).zfill(2)+"A1"+str(a).zfill(2)]
+        
+        # print( "sA1 ", sA1)
+        
         fA1.write(str(a1).zfill(2)+ "," + sA1 + "," + str(i).zfill(2) + "\n" )
         a = a + 1
         a1 = a1 + 1  
@@ -168,13 +177,22 @@ iNbArti = int(dZotero["T1"])
 i=1
 k1=1
 while i < iNbArti+1:
+
+    #
+    #   Ya pas toujours de Tag
+    #
     try:
         nK1 = dZotero[str(i).zfill(2)+"K1"]
     except:
         nK1 = 0
+    # print( "article ", i, " nK1 ", nK1 )   
+
     k = 1
-    while k < int(nK1):
+    while k < int(nK1)+1 :
         sK1 = dZotero[str(i).zfill(2)+"K1"+str(k).zfill(2)]
+
+        # print( "sK1 ", sK1)
+
         fK1.write(str(k1).zfill(2)+ "," + sK1 + "," + str(i).zfill(2)+"\n" )
         k = k + 1
         k1 = k1 + 1  
