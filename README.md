@@ -10,6 +10,7 @@ Le programme est basé sur une extraction des données en entrée selon le forma
 	T1 ...... (Titre principal de l'article)
 	A1 ...... (Auteur numero 1)
 	An ...... (Auteur numero N)
+	JO ...... (Nom du Journal)
 	YR ...... (Année de l'article)
 	LA ...... (Langue de l'article)
 	K1 ...... (Tag numero 1
@@ -29,8 +30,8 @@ Puis le mettre dans un dictionnaire selon le format suivant:
 
 Génération fichier T1.CSV
 
-	Id, Label, RF, YR, LA
-	.., ....., .., .., ..
+	Id, Label, RF, JO, YR, LA
+	.., ....., .., .., .., ..
 	
 Génération fichier A1.CSV
 
