@@ -31,6 +31,11 @@ def addRT( sLine ):
         sKey="{:02d}".format(nbart)+"RT"
         dZotero[sKey]=ClearVirgule(dataline.rstrip())
 
+def addJO( sLine ):
+        dataline = sLine[3:]
+        sKey="{:02d}".format(nbart)+"JO"
+        dZotero[sKey]=ClearVirgule(dataline.rstrip())
+
 def addYR( sLine ):
         dataline = sLine[3:]
         sKey="{:02d}".format(nbart)+"YR"
@@ -79,6 +84,9 @@ for line in fZotero:
     if  line[0:2] == "YR":
         addYR( line )
 
+    if  line[0:2] == "JO":
+        addJO( line )
+
     if  line[0:2] == "LA":
         addLA( line )
 
@@ -102,7 +110,7 @@ print( dZotero )
 #
 #   Restitution des Titres
 #
-fT1.write("Id,Label,RT,YR,LA\n")
+fT1.write("Id,Label,RT,JO,YR,LA\n")
 
 iNbArti = int(dZotero["T1"])
 i=1
@@ -115,6 +123,10 @@ while i < iNbArti+1:
         sRT = dZotero[str(i).zfill(2)+"RT"]
     except:
         sRT = "neant"
+    try:
+        sJO = dZotero[str(i).zfill(2)+"JO"]
+    except:
+        sJO = "neant"
     try: 
         sYR = dZotero[str(i).zfill(2)+"YR"]
     except:
@@ -123,7 +135,7 @@ while i < iNbArti+1:
         sLA = dZotero[str(i).zfill(2)+"LA"]
     except:
         sLA = "??"
-    fT1.write(str(i).zfill(2)+ "," + sLabel + "," + sRT + "," + sYR + "," + sLA + "\n" )
+    fT1.write(str(i).zfill(2)+ "," + sLabel + "," + sRT + "," + sJO + "," + sYR + "," + sLA + "\n" )
     i = i +1  
 
 fT1.close()
